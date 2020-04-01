@@ -79,6 +79,7 @@ auto make_move(vec2d *g, coordinates  b, int *c)
 }
 std::string get_winner(vec2d* a)
 {
+	int counter=0;
 	vec2d bordCheck = *a;
 	//Win conditions for X
 
@@ -121,7 +122,21 @@ std::string get_winner(vec2d* a)
 		::over = true;
 		return "O wins";
 	}
-	return "No winners";
+	for (int x = 0; x < 3; x++)
+	{
+		for (int y = 0; y < 3; y++)
+		{
+			if (bordCheck[x][y] == "O" || bordCheck[x][y] == "X")
+				counter++;
+			else
+				return "Nothing";
+		}
+	}
+	if (counter == 9) {
+		std::cout << "\n\nThe match ends in a draw!\n";
+		::over = true;
+		return "Draw";
+	}
 }
 
 int main()
